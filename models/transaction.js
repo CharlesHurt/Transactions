@@ -34,7 +34,7 @@ exports.write = function(transactions, callback) {
   fs.writeFile(TRANSACTION_FILE, JSON.stringify(transactions), callback)
 }
 
-exports.update = function(id, callback) {
+exports.update = function(id, updatesObj, callback) {
   this.get((err, transactions) => {
     var beforeLength = transactions.length
     if (err) {
@@ -44,11 +44,16 @@ exports.update = function(id, callback) {
         if (transaction.id === id) {
           console.log('finish update the transaction here')
           //by going throught he keys of the updatesObj
+          for (var key in updatesObj) {
+            transaction[key] = updatesObj[key]
+          }
+          return transaction
+        } else {
+          return transaction
         }
       })
       this.write(updatedTransactions, callback)
     }
-    // TODO send back the updated transaction
   })
 }
 
@@ -63,7 +68,6 @@ exports.delete = function(id, callback) {
         if (transaction.id !== id) {
           return true
         } else {
-          console.log('FOUND THE ONE TO DELETE');
           return false
         }
       })

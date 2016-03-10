@@ -35,13 +35,14 @@ router.put('/transactions/:id', function(req, res, next) {
   var id = req.params.id
   var updatesObj = req.body
 
-  //Make this an arrow function for access to req, res?
-  //Transaction.update(id, updatesObj, function(err, updatesObj) {
-
-  //})
-  res.send('Make this an arrow function for access to req, res? +')
-  //Transactions.update(id, updatesObj, function(err, updatesObj) {')
-
+  Transaction.update(id, updatesObj, function(err, updatesObj) {
+    if (err) {
+      res.status(400)
+      res.send(err)
+    } else {
+      res.send(updatesObj)
+    }
+  })
 });
 
 router.delete('/transactions/:id', function(req, res, next) {
