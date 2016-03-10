@@ -13,7 +13,7 @@ exports.get = function(callback) {
       return
     } else {
       var transactions = JSON.parse(raw_transactions)
-      callback(err, shoes)
+      callback(err, transactions)
     }
   })
 }
@@ -42,13 +42,13 @@ exports.update = function(id, callback) {
     } else {
       var updatedTransactions = transactions.map(function(transaction) {
         if (transaction.id === id) {
-          update the transaction here
-          by going throught he keys of the updatesObj
+          console.log('finish update the transaction here')
+          //by going throught he keys of the updatesObj
         }
       })
       this.write(updatedTransactions, callback)
     }
-    send back the updated transaction
+    // TODO send back the updated transaction
   })
 }
 
@@ -62,6 +62,9 @@ exports.delete = function(id, callback) {
       var remainingTransactions = transactions.filter(function(transaction) {
         if (transaction.id !== id) {
           return true
+        } else {
+          console.log('FOUND THE ONE TO DELETE');
+          return false
         }
       })
       this.write(remainingTransactions, callback)

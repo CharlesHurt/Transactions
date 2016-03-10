@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path')
 var fs = require('fs')
+var Transaction = require('../models/transaction')
 
 var router = express.Router();
 const INDEX_HTML = path.join(__dirname, 'index.html')
@@ -35,7 +36,7 @@ router.put('/transactions/:id', function(req, res, next) {
   var updatesObj = req.body
 
   //Make this an arrow function for access to req, res?
-  //Transactions.update(id, updatesObj, function(err, updatesObj) {
+  //Transaction.update(id, updatesObj, function(err, updatesObj) {
 
   //})
   res.send('Make this an arrow function for access to req, res? +')
@@ -45,7 +46,7 @@ router.put('/transactions/:id', function(req, res, next) {
 
 router.delete('/transactions/:id', function(req, res, next) {
   var id = req.params.id
-  Transactions.delete(id, function(err) {
+  Transaction.delete(id, function(err) {
     if (err) {
       res.status(400)
       res.send(err)
